@@ -88,7 +88,7 @@ Ignore a file extension for templates in stow.
 
 For example: `<package>/*.tmpl`
 
-## Example Package Meta File:
+## Example Package Meta File
 
 ```yaml
 version: "0.0.1"
@@ -104,6 +104,9 @@ targets:
     location: "/etc/package/conf.d/"
 ```
 
-## TODO:
+## TODO
 
 - [ ] refactor prototype in a non-script language
+- [ ] automagically handle stow ignore configuration
+- [ ] automagically handle version control configuration
+
