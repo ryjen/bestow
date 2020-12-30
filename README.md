@@ -1,6 +1,6 @@
 # bestow
 
-a wrapper for GNU stow to enable some goodies.
+A casing for GNU stow to enable some goodies.
 
 ## Goals
 
@@ -9,22 +9,22 @@ a wrapper for GNU stow to enable some goodies.
 
 ### Terminology
 
-**stow** - GNU stow utility
-**package** - a directory being stowed
-**meta data** - configuration for a package
-**meta file** - bestow.yml
-**template** - a package file that generates a new file
-**transient file** - a file that is generated
-**version control** - version control system such as git
-**convention** - rules that define system functionality over code
+- **stow** - GNU stow utility
+- **package** - a directory being stowed
+- **meta data** - configuration for a package
+- **meta file** - bestow.yml
+- **template** - a package file that generates a new file
+- **transient file** - a file that is generated
+- **version control** - version control system such as git
+- **convention** - rules that define system functionality over code
 
 ## Solutions
 
-### Bestow package meta data
+### Package meta data:
 
-Packages utilizing bestow create configuration file named `bestow.yml`.
+Stow packages utilizing bestow create configuration file named `bestow.yml`.
 
-### Bestow templates
+### Templates:
 
 Bestow templates address the need to generate new transient content, such as replacing environment variables.
 
@@ -48,7 +48,7 @@ A version control convention of which transient files to ignore can be establish
 - user or module `.gitignore` configuration
 
 
-### Bestow targeting system
+### Targeting:
 
 The bestow targeting system address the need to change the stow target directory based on configuration.
 
@@ -62,9 +62,9 @@ targets:
     location: "/etc/package/conf.d/"
 ```
 
-### Bestow conventions
+### Conventions:
 
-#### Subdirectory Ignore
+#### Subdirectory Ignore:
 
 Create a sub directory pattern ignored by stow to contain meta data and templates.
 
@@ -82,13 +82,13 @@ templates:
 
 Advantage would be that multiple templates and meta data are isolated with one rule.
 
-#### File Extension Ignore
+#### File Extension Ignore:
 
 Ignore a file extension for templates in stow.
 
 For example: `<package>/*.tmpl`
 
-## Example Package Meta File
+## Example Package Meta File:
 
 ```yaml
 version: "0.0.1"
@@ -103,3 +103,7 @@ targets:
   - file: "module.conf"
     location: "/etc/package/conf.d/"
 ```
+
+## TODO:
+
+- [ ] refactor prototype in a non-script language
