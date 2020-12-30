@@ -1,6 +1,6 @@
 # bestow
 
-A casing for GNU stow.
+A casing for [GNU stow](https://linux.die.net/man/8/stow) to add templating.
 
 ## Goals
 
@@ -8,7 +8,7 @@ A casing for GNU stow.
 
 ### Terminology
 
-- **[stow](https://linux.die.net/man/8/stow)** - GNU stow utility
+- **stow** - GNU stow utility
 - **package** - a directory being stowed
 - **meta data** - configuration for a package
 - **meta file** - bestow.yml
@@ -19,60 +19,68 @@ A casing for GNU stow.
 
 ## Solutions
 
-### Package meta data:
+### Package Meta Data:
 
-Stow packages utilizing bestow create configuration file named `bestow.yml`.
+Stow packages utilizing bestow create a configuration file named `bestow.yml`.
 
 ### Templates:
 
-Bestow templates address the need to generate new transient content, such as replacing environment variables.
+Bestow templates address the need to add transient content, such as environment specific variables.
 
 Templates and generated content must co-exist in the same package for stow to function properly.
 
-1. templates generate a new transient file in the same package
+1. templates generate a new transient files in the same package
 2. templates must be ignored by stow
 3. templates must be included in version control
 4. transient files must be ignored by version control
 
-A stow convention of which files to link can be established using:
+Stow conventions of which files should ignored can be established using:
 
-- stow command line arguments
-- environment variables
+- stow command line arguments (passthrough)
 - user or per package `.stowrc` configuration
 - user `.stow-global-ignore` or package `.stow-local-ignore` configuration
 
-
-A version control convention of which transient files to ignore can be established using a similar approach.  For example in git:
+Version control conventions of which transient files to ignore can be established using a similar approach.  For example in git:
 
 - git command line arguments
-- environment variables
 - user or package `.gitignore` configuration
 
-### Conventions:
+## Conventions:
 
-#### Subdirectory Ignore:
+### Subdirectory Ignore:
 
-Create a sub directory pattern ignored by stow to contain meta data and templates.
+**1.** Add a directory pattern to stow using `~/.stow-global-ignore` or `<package>/.stow-local-ignore`:
 
-For example in `.stow-global-ignore`: `<package>/bestow`
+```
+_meta
+```
 
-Template outputs would then be relative paths back to the package. 
-
-For example:
+**2.** Configure `<package>/_meta/bestow.yml`.  Template outputs are relative paths back to the package: 
 
 ```yaml
+version: "0.0.1"
 templates:
   - file: "settings.json"
     location: "../module/settings.json"
 ```
 
-#### File Extension Ignore:
+**3** Add transient files to version control ignore lists (`.gitignore`):
 
-Ignore a file extension for templates in stow.
+```
+module/settings.json
+```
 
-For example in `.stow-global-ignore`: `<package>/*.tmpl`
 
-## Example Package Meta File
+### File Ignore:
+
+**1.** Add a file pattern to `.stow-global-ignore` or `<package>/.stow-local-ignore`:
+
+```
+*.tmpl
+bestow.yml
+```
+
+**2.** Configure `<package>/bestow.yml`:
 
 ```yaml
 version: "0.0.1"
@@ -81,6 +89,13 @@ templates:
     location: "settings.json"
   - file: "module.conf.tmpl"
     location: "module.conf"
+```
+
+**3.** Add transient files to version control ignore lists (`<package>/.gitignore`):
+
+```
+/module.conf
+/settings.json
 ```
 
 ## TODO
