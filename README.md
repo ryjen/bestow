@@ -9,7 +9,7 @@ A casing for GNU stow to enable some goodies.
 
 ### Terminology
 
-- **stow** - GNU stow utility
+- **[stow](https://linux.die.net/man/8/stow)** - GNU stow utility
 - **package** - a directory being stowed
 - **meta data** - configuration for a package
 - **meta file** - bestow.yml
@@ -37,14 +37,16 @@ Templates and transient content must co-exist in the same package for stow to fu
 
 A stow convention of which files to link can be established using:
 
-- stow cli arguments
+- stow command line arguments
+- environment variables
 - user or per package `.stowrc` configuration
 - user `.stow-global-ignore` or package `.stow-local-ignore` configuration
 
 
 A version control convention of which transient files to ignore can be established using a similar approach.  For example in git:
 
-- git cli arguments
+- git command line arguments
+- environment variables
 - user or package `.gitignore` configuration
 
 
@@ -68,7 +70,7 @@ targets:
 
 Create a sub directory pattern ignored by stow to contain meta data and templates.
 
-For example: `<package>/bestow`
+For example in `.stow-global-ignore`: `<package>/bestow`
 
 Template outputs would then be relative paths back to the package. 
 
@@ -80,13 +82,11 @@ templates:
     location: "../module/settings.json"
 ```
 
-Advantage would be that multiple templates and meta data are isolated with one rule.
-
 #### File Extension Ignore:
 
 Ignore a file extension for templates in stow.
 
-For example: `<package>/*.tmpl`
+For example in `.stow-global-ignore`: `<package>/*.tmpl`
 
 ## Example Package Meta File
 
@@ -109,3 +109,11 @@ targets:
 - [ ] refactor prototype in a non-script language
 - [ ] automagically handle stow ignore configuration
 - [ ] automagically handle version control configuration
+- [ ] add version check
+
+
+## Related
+
+- [GNU stow](https://linux.die.net/man/8/stow)
+- [envsubst](https://linux.die.net/man/1/envsubst)
+- [dotfile managers](https://github.com/topics/dotfile-manager)
