@@ -1,0 +1,7 @@
+version: 0.0.1
+templates:
+  - file: "test.json.tmpl"
+    location: "test.json"
+targets:
+  - file: "root.conf"
+    location: "/tmp/bestow"

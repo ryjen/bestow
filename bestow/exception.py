@@ -1,0 +1,2 @@
+class MetaException(Exception):
+    pass
