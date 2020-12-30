@@ -1,0 +1,3 @@
+file: "test.json.tmpl"
+location: "test.json"
+method: "link"

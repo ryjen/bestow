@@ -1,2 +1,5 @@
+"""A module for custom exceptions"""
+
+
 class MetaException(Exception):
-    pass
+    """Generic meta data exception"""

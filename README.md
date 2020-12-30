@@ -1,11 +1,10 @@
 # bestow
 
-A casing for GNU stow to enable some goodies.
+A casing for GNU stow.
 
 ## Goals
 
-1. Allow environment variables in content
-2. Allow changing stow target directories
+1. Allow environment variables in stowed content
 
 ### Terminology
 
@@ -28,7 +27,7 @@ Stow packages utilizing bestow create configuration file named `bestow.yml`.
 
 Bestow templates address the need to generate new transient content, such as replacing environment variables.
 
-Templates and transient content must co-exist in the same package for stow to function properly.
+Templates and generated content must co-exist in the same package for stow to function properly.
 
 1. templates generate a new transient file in the same package
 2. templates must be ignored by stow
@@ -48,21 +47,6 @@ A version control convention of which transient files to ignore can be establish
 - git command line arguments
 - environment variables
 - user or package `.gitignore` configuration
-
-
-### Targeting:
-
-The bestow targeting system address the need to change the stow target directory based on configuration.
-
-This simply adds the appropriate CLI argument to stow, and relies on the operating system and stow for security.
-
-For example:
-
-```yaml
-targets:
-  - file: "system.conf"
-    location: "/etc/package/conf.d/"
-```
 
 ### Conventions:
 
@@ -97,11 +81,6 @@ templates:
     location: "settings.json"
   - file: "module.conf.tmpl"
     location: "module.conf"
-targets:
-  - file: "settings.json"
-    location: "/etc/package/conf.d/"
-  - file: "module.conf"
-    location: "/etc/package/conf.d/"
 ```
 
 ## TODO

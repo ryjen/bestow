@@ -1,7 +1,0 @@
-version: 9.9.9
-templates:
-  - file: "test.json.tmpl"
-    location: "test.json"
-targets:
-  - file: "root.conf"
-    location: "/tmp/bestow"

@@ -1,0 +1,4 @@
+version: 9.9.9
+templates:
+  - file: "test.json"
+    location: "../test.json"

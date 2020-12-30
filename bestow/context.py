@@ -1,29 +1,18 @@
-from os import path, walk
-from .meta import Meta
+"""A module the context around GNU stow"""
 
 
-class Context(object):
+class Context():
+    """Maintains options and arguments for GNU stow"""
+
     def __init__(self, arguments):
-        self.packages = [*arguments]
-        self.value = ["stow"]
+        self.arguments = [arg for arg in arguments if arg[0] != '-']
+        self.options = [opt for opt in arguments if opt[0] == '-']
+        self.executable = "stow"
 
-    def option(self, val):
-        self.value.append(val)
+    def add_option(self, val):
+        """adds an option switch"""
+        self.options.append(val)
 
-    def executable(self):
-        return self.value
-
-    def process(self):
-        for pkg in self.packages:
-            self.process_package(pkg)
-
-    def process_package(self, pkg):
-
-        if not path.isdir(pkg):
-            return
-
-        for dirpath, dirs, files in walk(pkg):
-            for filename in files:
-                meta = Meta.load(dirpath, filename)
-                if meta is not None:
-                    meta.process()
+    def argv(self):
+        """returns the executable, options and arguments"""
+        return [self.executable, *self.options, *self.arguments]
