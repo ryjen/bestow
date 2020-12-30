@@ -38,14 +38,14 @@ Templates and transient content must co-exist in the same package for stow to fu
 A stow convention of which files to link can be established using:
 
 - stow cli arguments
-- user or per module `.stowrc` configuration
-- user `.stow-global-ignore or module `.stow-local-ignore` configuration
+- user or per package `.stowrc` configuration
+- user `.stow-global-ignore` or package `.stow-local-ignore` configuration
 
 
 A version control convention of which transient files to ignore can be established using a similar approach.  For example in git:
 
 - git cli arguments
-- user or module `.gitignore` configuration
+- user or package `.gitignore` configuration
 
 
 ### Targeting:
@@ -109,4 +109,3 @@ targets:
 - [ ] refactor prototype in a non-script language
 - [ ] automagically handle stow ignore configuration
 - [ ] automagically handle version control configuration
-
